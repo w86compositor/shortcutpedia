@@ -12,6 +12,7 @@ $(document).ready(() => {
 			let key = e.which;
 
 			if (key === 13) {
+				$("#results").empty();
 				makeRequest();
 				console.log("you have pressed the Enter key")
 			}
@@ -38,7 +39,7 @@ $(document).ready(() => {
 								<h5 class="mb-1">${value.title}</h5>\
 							</div>\
 							<p class="mb-1">${value.extract}</p>\
-						</a>`)
+						</a>`);
 							// console.log(value.title);
 							// console.log(value.extract);
 						}
