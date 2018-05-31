@@ -34,7 +34,7 @@ $(document).ready(() => {
 						// console.log(articles);
 
 						for (let value of Object.values(articles)) {
-							$("#results").append(`<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">\
+							$("#results").append(`<a href="#" onclick="window.open('https://en.wikipedia.org/wiki/${value.title}')"         class="list-group-item list-group-item-action flex-column align-items-start">\
 							<div class="d-flex w-100 justify-content-between">\
 								<h5 class="mb-1">${value.title}</h5>\
 							</div>\
@@ -43,7 +43,7 @@ $(document).ready(() => {
 							// console.log(value.title);
 							// console.log(value.extract);
 						}
-					}
+					} 
 				});
 			}
 
