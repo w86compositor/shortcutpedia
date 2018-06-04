@@ -3,16 +3,11 @@ $(document).ready(() => {
 
 	let endpoint = 'https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch='
 
-
 	$("#random").click(() => {
 		return window.open("https://en.wikipedia.org/wiki/Special:Random")
 	});
-		
-	
-
 
 	function thisWholeThing() {
-
 		$("#search").keypress((e) => {
 			let searchTerm = $("#search").val();
 			let key = e.which;
@@ -20,7 +15,7 @@ $(document).ready(() => {
 			if (key === 13) {
 				$("#results").empty();
 				makeRequest();
-				console.log("you have pressed the Enter key")
+				// console.log("you have pressed the Enter key")
 			}
 
 			function makeRequest() {
@@ -32,7 +27,7 @@ $(document).ready(() => {
 					headers: {
 						'Api-User-Agent': 'Mozilla/5.0'
 					},
-					success: function (data) {
+					success: (data) => {
 						// do something with data
 						console.log(data);
 
@@ -40,13 +35,16 @@ $(document).ready(() => {
 						// console.log(articles);
 
 						for (let value of Object.values(articles)) {
-							$("#results").append(`<a href="#" onclick="window.open('https://en.wikipedia.org/wiki/${value.title}')" class="list-group-item list-group-item-action flex-column align-items-start">\
-							<div class="d-flex w-100 justify-content-between">\
-								<h5 class="mb-1">${value.title}</h5>\
-							</div>\
-							<p class="mb-1">${value.extract}</p>\
-						</a>`);
+							$("#results").append(`<a href="#" onclick="window.open('https://en.wikipedia.org/?curid=${value.pageid}')" class="list-group-item list-group-item-action flex-column align-items-start">\
+		<div class="d-flex w-100 justify-content-between">\
+			<h5 class="mb-1">${value.title}</h5>\
+		</div>\
+		<p class="mb-1">${value.extract}</p>\
+	</a>`);
 						}
+					},
+					error: (errorMsg) => {
+						$("#results").append(`<li class="list-group-item list-group-item-danger">Oh no something went wrong...This is a ${errorMsg.status} error, but we'll fix it</li>`)
 					}
 				});
 			}
