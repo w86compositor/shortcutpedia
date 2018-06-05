@@ -1,12 +1,11 @@
 $(document).ready(() => {
-  console.log("ready!!!");
+  $("#random").click(() => {
+    return window.open("https://en.wikipedia.org/wiki/Special:Random");
+  });
 
   let endpoint =
     "https://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=";
 
-  $("#random").click(() => {
-    return window.open("https://en.wikipedia.org/wiki/Special:Random");
-  });
 
   function thisWholeThing() {
     $("#search").keypress(e => {
@@ -16,7 +15,6 @@ $(document).ready(() => {
       if (key === 13) {
         $("#results").empty();
         makeRequest();
-        // console.log("you have pressed the Enter key")
       }
 
       function makeRequest() {
@@ -29,7 +27,6 @@ $(document).ready(() => {
             "Api-User-Agent": "Mozilla/5.0"
           },
           success: data => {
-            // console.log(data);
             if (data.query === undefined) {
               $("#results").append(
                 `<div class="list-group">
